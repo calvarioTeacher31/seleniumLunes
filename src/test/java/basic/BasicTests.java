@@ -10,7 +10,7 @@ public class BasicTests extends BaseTest {
     @Description("Current url test")
     public void currentUrlTest() {
         log.info("Verifying current url is the same as mainUrl");
-        Assert.assertEquals(driver.getCurrentUrl(), mainUrl);
+        Assert.assertEquals(driver.getCurrentUrl(), "");
     }
 
     @Test(groups = {smoke, regression})
@@ -45,5 +45,10 @@ public class BasicTests extends BaseTest {
     @Description("Current url test")
     public void failed2Test() {
         utilities.verifyUrl(driver.getCurrentUrl(), "meme.com");
+    }
+
+    @Override
+    protected void initPages() {
+
     }
 }

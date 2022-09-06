@@ -2,34 +2,35 @@ package login;
 
 import base.BaseTest;
 import io.qameta.allure.Description;
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.HomeShoppingPage;
+import pageObjects.LoginPage;
 
 public class LoginTests extends BaseTest {
-    @Test(groups = {smoke})
+    private LoginPage loginPage;
+    private HomeShoppingPage homeShoppingPage;
+
+    @Test(groups = {smoke}, enabled = false)
     @Description("Login Test")
     public void loginTest() {
-        var username = "standard_user";
-        var password = "secret_sauce";
+        var credentials = dataProviders.getValidCredentials();
+        loginPage.fillForm(credentials.getUsername(), credentials.getPassword());
+        homeShoppingPage.waitPageToLoad();
+        homeShoppingPage.verifyPage();
+    }
 
-        var usernameInput = driver.findElement(By.id("user-name"));
-        var passwordInput = driver.findElement((By.id("password")));
-        var loginButton = driver.findElement((By.cssSelector("input[data-test='login-button']")));
-        var productsLabel = driver.findElement((By.xpath("//span[text()='Products']")));
+    @Test(groups = {regression})
+    @Description("Invalid credentials Test")
+    public void invalidCredentialTest() {
+        var errorMessage = "Epic sadface: Sorry, this user has been locked out.";
+        var credentials = dataProviders.getLockedCredentials();
+        loginPage.fillForm(credentials.getUsername(), credentials.getPassword());
+        loginPage.verifyErrorMessage(errorMessage);
+    }
 
-        log.info("Filling username: " + username);
-        usernameInput.sendKeys(username);
-
-        log.info("Filling password: " + password);
-        passwordInput.sendKeys(password);
-
-        log.info("Clicking on login button");
-        loginButton.click();
-
-        log.info("Waiting shopping page to load");
-        utilities.waitSeconds(2);
-
-        Assert.assertTrue(productsLabel.isDisplayed());
+    @Override
+    protected void initPages() {
+        loginPage = new LoginPage(driver);
+        homeShoppingPage = new HomeShoppingPage(driver);
     }
 }
