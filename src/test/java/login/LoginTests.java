@@ -2,34 +2,32 @@ package login;
 
 import base.BaseTest;
 import io.qameta.allure.Description;
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.HomePage;
+import pageObjects.LoginPage;
 
 public class LoginTests extends BaseTest {
+    private LoginPage loginPage;
+    private HomePage homePage;
+
     @Test(groups = {smoke})
     @Description("Login Test")
     public void loginTest() {
         var username = "standard_user";
         var password = "secret_sauce";
 
-        var usernameInput = driver.findElement(By.id("user-name"));
-        var passwordInput = driver.findElement((By.id("password")));
-        var loginButton = driver.findElement((By.cssSelector("input[data-test='login-button']")));
-        var productsLabel = driver.findElement((By.xpath("//span[text()='Products']")));
-
-        log.info("Filling username: " + username);
-        usernameInput.sendKeys(username);
-
-        log.info("Filling password: " + password);
-        passwordInput.sendKeys(password);
-
-        log.info("Clicking on login button");
-        loginButton.click();
+        loginPage.loginForm(username, password);
 
         log.info("Waiting shopping page to load");
         utilities.waitSeconds(2);
 
-        Assert.assertTrue(productsLabel.isDisplayed());
+        homePage.verifyProductLabelIsDisplayed();
+    }
+
+
+    @Override
+    protected void initPages() {
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
     }
 }

@@ -12,7 +12,7 @@ import utilities.Logs;
 import utilities.Utilities;
 
 @Listeners({SuiteListeners.class, TestListeners.class})
-public class BaseTest extends DriverManager {
+public abstract class BaseTest extends DriverManager {
     protected final Logs log = new Logs();
     protected final Utilities utilities = new Utilities();
     protected DriverManager driverManager = new DriverManager();
@@ -26,6 +26,7 @@ public class BaseTest extends DriverManager {
     public void setupBase() {
         softAssert = new SoftAssert();
         driver = driverManager.createDriver();
+        initPages();
 
         log.info("Navigating to the main url");
         driver.get(mainUrl);
@@ -43,4 +44,6 @@ public class BaseTest extends DriverManager {
     public WebDriver getDriver() {
         return driver;
     }
+
+    protected abstract void initPages();
 }

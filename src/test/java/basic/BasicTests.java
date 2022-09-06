@@ -46,4 +46,9 @@ public class BasicTests extends BaseTest {
     public void failed2Test() {
         utilities.verifyUrl(driver.getCurrentUrl(), "meme.com");
     }
+
+    @Override
+    protected void initPages() {
+        
+    }
 }
