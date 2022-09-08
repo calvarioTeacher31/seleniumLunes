@@ -11,7 +11,7 @@ public class CustomVerifications {
         element = driver.findElement(locator);
     }
 
-    public boolean verifyIsDisplayed(By locator, WebDriver driver) {
+    public boolean isDisplayed(By locator, WebDriver driver) {
         findElement(locator, driver);
         return element.isDisplayed();
     }

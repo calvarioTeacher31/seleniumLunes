@@ -2,18 +2,18 @@ package pageObjects;
 
 import base.BasePage;
 import io.qameta.allure.Step;
-import locators.CustomLocator;
+import locators.CustomWebElements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class LoginPage extends BasePage {
-    private final CustomLocator usernameInput = new CustomLocator(By.id("user-name"), driver);
-    private final CustomLocator passwordInput = new CustomLocator(By.id("password"), driver);
-    private final CustomLocator loginButton = new CustomLocator(By.id("login-button"), driver);
-    private final CustomLocator robotImage = new CustomLocator(By.className("bot_column"), driver);
-    private final CustomLocator invalidCredentialsError =
-            new CustomLocator(By.cssSelector("h3[data-test='error']"), driver);
+    private final CustomWebElements usernameInput = new CustomWebElements(By.id("user-name"), driver);
+    private final CustomWebElements passwordInput = new CustomWebElements(By.id("password"), driver);
+    private final CustomWebElements loginButton = new CustomWebElements(By.id("login-button"), driver);
+    private final CustomWebElements robotImage = new CustomWebElements(By.className("bot_column"), driver);
+    private final CustomWebElements invalidCredentialsError =
+            new CustomWebElements(By.cssSelector("h3[data-test='error']"), driver);
 
     public LoginPage(WebDriver driver) {
         super(driver, 3);
@@ -28,10 +28,10 @@ public class LoginPage extends BasePage {
     @Override
     @Step("Verifying Login Page")
     public void verifyPage() {
-        softAssert.assertTrue(usernameInput.verifyIsDisplayed(), "User name input is not displayed");
-        softAssert.assertTrue(passwordInput.verifyIsDisplayed(), "Password input is not displayed");
-        softAssert.assertTrue(loginButton.verifyIsDisplayed(), "Login Button is not displayed");
-        softAssert.assertTrue(robotImage.verifyIsDisplayed(), "Robot image is not displayed");
+        softAssert.assertTrue(usernameInput.isDisplayed(), "User name input is not displayed");
+        softAssert.assertTrue(passwordInput.isDisplayed(), "Password input is not displayed");
+        softAssert.assertTrue(loginButton.isDisplayed(), "Login Button is not displayed");
+        softAssert.assertTrue(robotImage.isDisplayed(), "Robot image is not displayed");
         softAssert.assertAll();
     }
 

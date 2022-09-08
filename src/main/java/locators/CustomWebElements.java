@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CustomLocator {
+public class CustomWebElements {
     private final By locator;
     private final WebDriver driver;
     private final CustomActions customActions = new CustomActions();
@@ -15,36 +15,36 @@ public class CustomLocator {
     private final CustomAttributes customAttributes = new CustomAttributes();
     private WebDriverWait wait;
 
-    public CustomLocator(By locator, WebDriver driver) {
+    public CustomWebElements(By locator, WebDriver driver) {
         this.locator = locator;
         this.driver = driver;
     }
 
-    public CustomLocator click() {
+    public CustomWebElements click() {
         customActions.click(locator, driver);
         return this;
     }
 
-    public CustomLocator sendKeys(String text) {
+    public CustomWebElements sendKeys(String text) {
         customActions.sendKeys(locator, driver, text);
         return this;
     }
 
-    public boolean verifyIsDisplayed() {
-        return customVerifications.verifyIsDisplayed(locator, driver);
+    public boolean isDisplayed() {
+        return customVerifications.isDisplayed(locator, driver);
     }
 
     public String getText() {
         return customAttributes.getText(locator, driver);
     }
 
-    public CustomLocator waitForVisibility(int timeOut) {
+    public CustomWebElements waitForVisibility(int timeOut) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator)); //explicit wait per se
         return this;
     }
 
-    public CustomLocator waitForVisibility() {
+    public CustomWebElements waitForVisibility() {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));  //explicit wait per se
         return this;

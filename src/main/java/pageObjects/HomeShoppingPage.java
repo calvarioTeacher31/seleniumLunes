@@ -2,17 +2,17 @@ package pageObjects;
 
 import base.BasePage;
 import io.qameta.allure.Step;
-import locators.CustomLocator;
+import locators.CustomWebElements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class HomeShoppingPage extends BasePage {
-    private final CustomLocator productLabel =
-            new CustomLocator(By.xpath("//span[text()='Products']"), driver);
-    private final CustomLocator filterSelect =
-            new CustomLocator(By.cssSelector("select[data-test='product_sort_container']"), driver);
-    private final CustomLocator sideBarMenuButton =
-            new CustomLocator(By.id("react-burger-menu-btn"), driver);
+    private final CustomWebElements productLabel =
+            new CustomWebElements(By.xpath("//span[text()='Products']"), driver);
+    private final CustomWebElements filterSelect =
+            new CustomWebElements(By.cssSelector("select[data-test='product_sort_container']"), driver);
+    private final CustomWebElements sideBarMenuButton =
+            new CustomWebElements(By.id("react-burger-menu-btn"), driver);
 
     public HomeShoppingPage(WebDriver driver) {
         super(driver, 3);
@@ -27,8 +27,8 @@ public class HomeShoppingPage extends BasePage {
     @Override
     @Step("Verifying Home Page")
     public void verifyPage() {
-        softAssert.assertTrue(productLabel.verifyIsDisplayed(), "Product label is not displayed");
-        softAssert.assertTrue(filterSelect.verifyIsDisplayed(), "Filter select is not displayed");
+        softAssert.assertTrue(productLabel.isDisplayed(), "Product label is not displayed");
+        softAssert.assertTrue(filterSelect.isDisplayed(), "Filter select is not displayed");
         softAssert.assertAll();
     }
 

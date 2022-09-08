@@ -1,6 +1,6 @@
 package base;
 
-import locators.CustomLocator;
+import locators.CustomWebElements;
 import org.openqa.selenium.WebDriver;
 import org.testng.asserts.SoftAssert;
 import utilities.Logs;
@@ -11,18 +11,17 @@ public abstract class BasePage {
     private final int timeOut;
     protected SoftAssert softAssert;
 
-
     public BasePage(WebDriver driver, int timeOut) {
         this.driver = driver;
         this.timeOut = timeOut;
         softAssert = new SoftAssert();
     }
 
-    protected void waitPage(CustomLocator customLocator, String pageName) {
+    protected void waitPage(CustomWebElements customWebElements, String pageName) {
         var message = String.format("Waiting %s to load", pageName);
         log.info(message);
 
-        customLocator.waitForVisibility(timeOut);
+        customWebElements.waitForVisibility(timeOut);
 
         message = String.format("%s loaded successfully", pageName);
         log.info(message);
