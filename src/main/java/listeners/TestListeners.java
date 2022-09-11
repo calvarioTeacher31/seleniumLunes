@@ -1,7 +1,6 @@
 package listeners;
 
 import base.BaseTest;
-import io.qameta.allure.listener.TestLifecycleListener;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -9,7 +8,7 @@ import org.testng.ITestResult;
 import utilities.DriverManager;
 import utilities.Logs;
 
-public class TestListeners implements ITestListener, TestLifecycleListener {
+public class TestListeners implements ITestListener {
     private final Logs log = new Logs();
 
     @Override
@@ -52,6 +51,7 @@ public class TestListeners implements ITestListener, TestLifecycleListener {
 
     @Override
     public void onFinish(ITestContext context) {
+        ;
         ITestListener.super.onFinish(context);
     }
 
