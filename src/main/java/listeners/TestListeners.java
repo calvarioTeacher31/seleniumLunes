@@ -1,6 +1,7 @@
 package listeners;
 
 import base.BaseTest;
+import io.qameta.allure.listener.TestLifecycleListener;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -8,7 +9,7 @@ import org.testng.ITestResult;
 import utilities.DriverManager;
 import utilities.Logs;
 
-public class TestListeners implements ITestListener {
+public class TestListeners implements ITestListener, TestLifecycleListener {
     private final Logs log = new Logs();
 
     @Override
@@ -26,7 +27,6 @@ public class TestListeners implements ITestListener {
         var driverManager = new DriverManager();
         var driver = getDriverFromResult(result);
         driverManager.getScreenshot(driver, result.getName());
-        driverManager.getAllureScreenshot(driver);
         log.endTest("FAIL");
     }
 

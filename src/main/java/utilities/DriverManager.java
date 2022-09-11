@@ -17,6 +17,7 @@ public class DriverManager {
     protected final Logs log = new Logs();
     private final String screenShotPath = "src/test/resources/screenshots";
     protected WebDriver driver;
+    private static WebDriver staticDriver;
 
     public WebDriver createDriver() {
         var browserName = System.getProperty("browser");
@@ -51,6 +52,8 @@ public class DriverManager {
         log.debug("Deleting cookies");
         driver.manage().deleteAllCookies();
 
+        staticDriver = driver;
+
         return driver;
     }
 
@@ -68,10 +71,9 @@ public class DriverManager {
         }
     }
 
-    @Attachment(value = "Screenshot failure", type = "image", fileExtension = "png")
-    public byte[] getAllureScreenshot(WebDriver driver) {
-        log.debug("Taking allure screenshot");
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    @Attachment(value = "Screenshot failure", type = "image/png")
+    public static byte[] getAllureScreenshot() {
+        return ((TakesScreenshot) staticDriver).getScreenshotAs(OutputType.BYTES);
     }
 
     public void deleteScreenshotDirectory() {

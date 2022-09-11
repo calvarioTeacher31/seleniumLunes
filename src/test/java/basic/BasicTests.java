@@ -1,8 +1,14 @@
 package basic;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import listeners.SuiteListeners;
+import listeners.TestListeners;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
+@Listeners({SuiteListeners.class, TestListeners.class})
 public class BasicTests extends BaseTest {
  /*   @Test(groups = {smoke})
     @Description("Current url test")
@@ -39,11 +45,14 @@ public class BasicTests extends BaseTest {
         utilities.verifyUrl(driver.getCurrentUrl(), "meme.com");
     }
 
+
+    }*/
+
     @Test(groups = {smoke}, enabled = false)
     @Description("Current url test")
     public void failed2Test() {
-        utilities.verifyUrl(driver.getCurrentUrl(), "meme.com");
-    }*/
+        utilities.verifyUrl("HELLO.COM", "meme.com");
+    }
 
     @Override
     protected void initPages(WebDriver driver) {
