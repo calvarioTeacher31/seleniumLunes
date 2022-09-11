@@ -2,18 +2,18 @@ package pageObjects;
 
 import base.BasePage;
 import io.qameta.allure.Step;
-import locators.CustomWebElements;
+import locators.CustomWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class LoginPage extends BasePage {
-    private final CustomWebElements usernameInput = new CustomWebElements(By.id("user-name"), driver);
-    private final CustomWebElements passwordInput = new CustomWebElements(By.id("password"), driver);
-    private final CustomWebElements loginButton = new CustomWebElements(By.id("login-button"), driver);
-    private final CustomWebElements robotImage = new CustomWebElements(By.className("bot_column"), driver);
-    private final CustomWebElements invalidCredentialsError =
-            new CustomWebElements(By.cssSelector("h3[data-test='error']"), driver);
+    private final CustomWebElement usernameInput = new CustomWebElement(By.id("user-name"), driver);
+    private final CustomWebElement passwordInput = new CustomWebElement(By.id("password"), driver);
+    private final CustomWebElement loginButton = new CustomWebElement(By.id("login-button"), driver);
+    private final CustomWebElement robotImage = new CustomWebElement(By.className("bot_column"), driver);
+    private final CustomWebElement invalidCredentialsError =
+            new CustomWebElement(By.cssSelector("h3[data-test='error']"), driver);
 
     public LoginPage(WebDriver driver) {
         super(driver, 3);

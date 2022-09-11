@@ -1,12 +1,10 @@
 package basic;
 
 import base.BaseTest;
-import io.qameta.allure.Description;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.openqa.selenium.WebDriver;
 
 public class BasicTests extends BaseTest {
-    @Test(groups = {smoke})
+ /*   @Test(groups = {smoke})
     @Description("Current url test")
     public void currentUrlTest() {
         log.info("Verifying current url is the same as mainUrl");
@@ -45,10 +43,9 @@ public class BasicTests extends BaseTest {
     @Description("Current url test")
     public void failed2Test() {
         utilities.verifyUrl(driver.getCurrentUrl(), "meme.com");
-    }
+    }*/
 
     @Override
-    protected void initPages() {
-
+    protected void initPages(WebDriver driver) {
     }
 }

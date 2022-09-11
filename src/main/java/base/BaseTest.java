@@ -14,12 +14,12 @@ import utilities.Logs;
 import utilities.Utilities;
 
 @Listeners({SuiteListeners.class, TestListeners.class})
-public abstract class BaseTest extends DriverManager {
+public abstract class BaseTest {
     protected final Logs log = new Logs();
     protected final Utilities utilities = new Utilities();
     protected DriverManager driverManager = new DriverManager();
     protected SoftAssert softAssert;
-    protected WebDriver driver;
+    private WebDriver driver;
     protected final String smoke = "Smoke";
     protected final String regression = "Regression";
     protected final DataProviders dataProviders = new DataProviders();
@@ -29,9 +29,8 @@ public abstract class BaseTest extends DriverManager {
     public void setupBase() {
         softAssert = new SoftAssert();
         driver = driverManager.createDriver();
-        initPages();
+        initPages(driver);
         commonFlows = new CommonFlows(driver);
-
         commonFlows.goToLoginPage(); //go to index
     }
 
@@ -45,5 +44,5 @@ public abstract class BaseTest extends DriverManager {
         return driver;
     }
 
-    protected abstract void initPages();
+    protected abstract void initPages(WebDriver driver);
 }

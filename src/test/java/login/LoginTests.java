@@ -2,6 +2,7 @@ package login;
 
 import base.BaseTest;
 import io.qameta.allure.Description;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import pageObjects.HomeShoppingPage;
 import pageObjects.LoginPage;
@@ -29,7 +30,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Override
-    protected void initPages() {
+    protected void initPages(WebDriver driver) {
         loginPage = new LoginPage(driver);
         homeShoppingPage = new HomeShoppingPage(driver);
     }

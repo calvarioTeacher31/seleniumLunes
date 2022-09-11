@@ -2,17 +2,23 @@ package pageObjects;
 
 import base.BasePage;
 import io.qameta.allure.Step;
-import locators.CustomWebElements;
+import locators.CustomWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class HomeShoppingPage extends BasePage {
-    private final CustomWebElements productLabel =
-            new CustomWebElements(By.xpath("//span[text()='Products']"), driver);
-    private final CustomWebElements filterSelect =
-            new CustomWebElements(By.cssSelector("select[data-test='product_sort_container']"), driver);
-    private final CustomWebElements sideBarMenuButton =
-            new CustomWebElements(By.id("react-burger-menu-btn"), driver);
+    private final CustomWebElement productLabel =
+            new CustomWebElement(By.xpath("//span[text()='Products']"), driver);
+    private final CustomWebElement filterSelect =
+            new CustomWebElement(By.cssSelector("select[data-test='product_sort_container']"), driver);
+    private final CustomWebElement sideBarMenuButton =
+            new CustomWebElement(By.id("react-burger-menu-btn"), driver);
+
+    private CustomWebElement getProductLabel(String productName) {
+        var dynamicLocator = String.format("//div[text()='%s']", productName);
+        return new CustomWebElement(By.xpath(dynamicLocator), driver);
+    }
 
     public HomeShoppingPage(WebDriver driver) {
         super(driver, 3);
@@ -36,5 +42,8 @@ public class HomeShoppingPage extends BasePage {
     public void openMenuBar() {
         log.info("Clicking to open menu bar");
         sideBarMenuButton.click();
+
+        var product = getProductLabel("Sauce Labs Backpack");
+        Assert.assertTrue(product.isDisplayed());
     }
 }
