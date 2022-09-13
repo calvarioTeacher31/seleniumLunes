@@ -31,7 +31,7 @@ public abstract class BaseTest {
         driver = driverManager.createDriver();
         initPages(driver);
         commonFlows = new CommonFlows(driver);
-        commonFlows.goToLoginPage(); //go to index
+        commonFlows.goToIndex(); //go to index
     }
 
     @AfterMethod(alwaysRun = true, description = "Master teardown")

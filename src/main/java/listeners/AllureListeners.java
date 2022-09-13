@@ -7,7 +7,8 @@ import utilities.DriverManager;
 public class AllureListeners implements TestLifecycleListener {
     @Override
     public void beforeTestStop(TestResult result) {
-        if (result.getStatus().name().equalsIgnoreCase("FAILED")) {
+        if (result.getStatus().name().equalsIgnoreCase("FAILED") ||
+                result.getStatus().name().equalsIgnoreCase("BROKEN")) {
             DriverManager.getAllureScreenshot();
         }
     }

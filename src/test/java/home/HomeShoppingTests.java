@@ -11,12 +11,18 @@ public class HomeShoppingTests extends BaseTest {
 
     @BeforeMethod(alwaysRun = true, description = "Setup")
     public void setup() {
-        commonFlows.goToHomeShoppingPage();
+        commonFlows.goToHome();
     }
 
     @Test(groups = {smoke})
-    public void verifyHomeShoppingPage() {
+    public void verifyHomeShoppingPageTest() {
         homeShoppingPage.verifyPage();
+    }
+
+    @Test(groups = {smoke})
+    public void verifyCountTest() {
+        homeShoppingPage.addAllItemsToCart();
+        homeShoppingPage.verifyItemCount(2);
     }
 
     @Override

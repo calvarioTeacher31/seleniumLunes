@@ -2,13 +2,9 @@ package basic;
 
 import base.BaseTest;
 import io.qameta.allure.Description;
-import listeners.SuiteListeners;
-import listeners.TestListeners;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners({SuiteListeners.class, TestListeners.class})
 public class BasicTests extends BaseTest {
  /*   @Test(groups = {smoke})
     @Description("Current url test")

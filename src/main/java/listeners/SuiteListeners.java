@@ -10,7 +10,7 @@ public class SuiteListeners implements ISuiteListener {
 
     @Override
     public void onStart(ISuite suite) {
-        new DriverManager().deleteScreenshotDirectory();
+        new DriverManager().deletePreviousEvidence();
         log.startSuite(suite.getName());
     }
 

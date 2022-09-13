@@ -14,26 +14,24 @@ public class CommonFlows {
         this.driver = driver;
     }
 
-    public void goToLoginPage() {
-        driver.get(mainUrl);
+    public void goToIndex() {
+        var loginPage = new LoginPage(driver);
 
-        var loginPage = new LoginPage(driver); //wait page to load
+        driver.get(mainUrl);
         loginPage.waitPageToLoad();
     }
 
-    public void goToHomeShoppingPage() {
-        var credentials = dataProviders.getValidCredentials();
-
-        var loginPage = new LoginPage(driver); //wait page to load
-        loginPage.fillForm(credentials.getUsername(), credentials.getPassword());
-
+    public void goToHome() {
+        var loginPage = new LoginPage(driver);
         var homeShoppingPage = new HomeShoppingPage(driver);
+        var validCredentials = dataProviders.getValidCredentials();
+
+        loginPage.fillForm(validCredentials.getUsername(), validCredentials.getPassword());
         homeShoppingPage.waitPageToLoad();
     }
 
-    public void openSideBarMenu() {
-        goToHomeShoppingPage();
-        var homeShoppingPage = new HomeShoppingPage(driver);
-        homeShoppingPage.openMenuBar();
+    public void goToStepOne() {
+        goToHome();
+        //click en el carrito
     }
 }

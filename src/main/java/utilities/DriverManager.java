@@ -16,6 +16,7 @@ import java.io.IOException;
 public class DriverManager {
     protected final Logs log = new Logs();
     private final String screenShotPath = "src/test/resources/screenshots";
+    private final String allureReportPath = "target/allure-results";
     protected WebDriver driver;
     private static WebDriver staticDriver;
 
@@ -44,6 +45,9 @@ public class DriverManager {
                 WebDriverManager.safaridriver().setup();
                 driver = new SafariDriver();
                 break;
+            default:
+                log.error("Bad driver name");
+                driver = null;
         }
 
         log.debug("Maximizing window");
@@ -76,12 +80,15 @@ public class DriverManager {
         return ((TakesScreenshot) staticDriver).getScreenshotAs(OutputType.BYTES);
     }
 
-    public void deleteScreenshotDirectory() {
+    public void deletePreviousEvidence() {
         try {
             log.debug("Cleaning screenshot folder");
             FileUtils.deleteDirectory(new File(screenShotPath));
+
+            log.debug("Cleaning previous allure folder");
+            FileUtils.deleteDirectory(new File(allureReportPath));
         } catch (IOException ioException) {
-            log.error("Failed cleaning screenshot folder");
+            log.error("Failed cleaning screenshot and allure folder");
             log.error(ioException.getLocalizedMessage());
         }
     }
