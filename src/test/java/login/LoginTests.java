@@ -4,8 +4,8 @@ import base.BaseTest;
 import io.qameta.allure.Description;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-import pageObjects.HomeShoppingPage;
-import pageObjects.LoginPage;
+import pageObjects.home.HomeShoppingPage;
+import pageObjects.login.LoginPage;
 
 public class LoginTests extends BaseTest {
     private LoginPage loginPage;

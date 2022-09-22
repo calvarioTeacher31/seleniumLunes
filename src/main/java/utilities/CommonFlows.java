@@ -2,8 +2,12 @@ package utilities;
 
 import data.DataProviders;
 import org.openqa.selenium.WebDriver;
-import pageObjects.HomeShoppingPage;
-import pageObjects.LoginPage;
+import pageObjects.bars.BurgerMenuPage;
+import pageObjects.bars.HeaderPage;
+import pageObjects.home.HomeShoppingPage;
+import pageObjects.login.LoginPage;
+import pageObjects.step.StepOnePage;
+import pageObjects.step.StepTwoPage;
 
 public class CommonFlows {
     private final WebDriver driver;
@@ -30,8 +34,36 @@ public class CommonFlows {
         homeShoppingPage.waitPageToLoad();
     }
 
-    public void goToStepOne() {
+    public void openBurgerMenu() {
+        var headerPage = new HeaderPage(driver);
+        var burgerMenuPage = new BurgerMenuPage(driver);
+
         goToHome();
-        //click en el carrito
+        headerPage.openBurgerMenu();
+        burgerMenuPage.waitPageToLoad();
+    }
+
+    public void goToStepOne(boolean addItems) {
+        var homeShoppingPage = new HomeShoppingPage(driver);
+        var headerPage = new HeaderPage(driver);
+        var stepOne = new StepOnePage(driver);
+
+        goToHome();
+
+        if (addItems) {
+            homeShoppingPage.addAllItemsToCart();
+        }
+
+        headerPage.clickOnCart();
+        stepOne.waitPageToLoad();
+    }
+
+    public void goToStepTwo(boolean addItems) {
+        var stepOnePage = new StepOnePage(driver);
+        var stepTwoPage = new StepTwoPage(driver);
+
+        goToStepOne(addItems);
+        stepOnePage.clickOnCheckout();
+        stepTwoPage.waitPageToLoad();
     }
 }

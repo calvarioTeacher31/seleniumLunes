@@ -3,6 +3,7 @@ package listeners;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import utilities.DriverManager;
+import utilities.FileManager;
 import utilities.Logs;
 
 public class SuiteListeners implements ISuiteListener {
@@ -11,6 +12,7 @@ public class SuiteListeners implements ISuiteListener {
     @Override
     public void onStart(ISuite suite) {
         new DriverManager().deletePreviousEvidence();
+        new FileManager().redirectStdErr();
         log.startSuite(suite.getName());
     }
 
