@@ -11,12 +11,10 @@ import org.testng.asserts.SoftAssert;
 import utilities.CommonFlows;
 import utilities.DriverManager;
 import utilities.Logs;
-import utilities.Utilities;
 
 @Listeners({SuiteListeners.class, TestListeners.class})
 public abstract class BaseTest {
     protected final Logs log = new Logs();
-    protected final Utilities utilities = new Utilities();
     protected DriverManager driverManager = new DriverManager();
     protected SoftAssert softAssert;
     private WebDriver driver;
@@ -25,7 +23,7 @@ public abstract class BaseTest {
     protected final DataProviders dataProviders = new DataProviders();
     protected CommonFlows commonFlows;
 
-    @BeforeMethod(alwaysRun = true, description = "Master precondition")
+    @BeforeMethod(alwaysRun = true, description = "Setup Base")
     public void setupBase() {
         softAssert = new SoftAssert();
         driver = driverManager.createDriver();
@@ -34,7 +32,7 @@ public abstract class BaseTest {
         commonFlows.goToIndex(); //go to index
     }
 
-    @AfterMethod(alwaysRun = true, description = "Master teardown")
+    @AfterMethod(alwaysRun = true, description = "Teardown Base")
     public void teardownBase() {
         log.debug("Killing the driver");
         driver.quit();

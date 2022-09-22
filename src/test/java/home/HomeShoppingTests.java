@@ -22,7 +22,7 @@ public class HomeShoppingTests extends BaseTest {
     @Test(groups = {smoke})
     public void verifyCountTest() {
         homeShoppingPage.addAllItemsToCart();
-        homeShoppingPage.verifyItemCount(2);
+        homeShoppingPage.verifyItemCount(6);
     }
 
     @Override
