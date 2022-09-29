@@ -5,33 +5,28 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.home.HomeShoppingPage;
-import pageObjects.step.StepTwoPage;
+import pageObjects.step.FinishCheckoutPage;
 
-public class StepTwoTests extends BaseTest {
+public class FinishCheckoutTests extends BaseTest {
     private HomeShoppingPage homeShoppingPage;
-    private StepTwoPage stepTwoPage;
+    private FinishCheckoutPage finishCheckoutPage;
 
     @BeforeMethod(alwaysRun = true, description = setup)
     public void setUp() {
-        commonFlows.goToStepTwo(true);
+        commonFlows.finishCheckout(true);
     }
 
     @Test(groups = smoke)
     public void verifyStepTwoPageTest() {
-        stepTwoPage.verifyPage();
-        stepTwoPage.clickOnCancel();
+        finishCheckoutPage.verifyPage();
+        finishCheckoutPage.clickOnBackToHome();
         homeShoppingPage.waitPageToLoad();
         homeShoppingPage.verifyPage();
-    }
-
-    @Test(groups = regression)
-    public void itemPriceTest() {
-        stepTwoPage.verifyItemPrice(dataProviders.getShoppingList());
     }
 
     @Override
     protected void initPages(WebDriver driver) {
         homeShoppingPage = new HomeShoppingPage(driver);
-        stepTwoPage = new StepTwoPage(driver);
+        finishCheckoutPage = new FinishCheckoutPage(driver);
     }
 }

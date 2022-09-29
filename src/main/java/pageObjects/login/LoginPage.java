@@ -35,13 +35,13 @@ public class LoginPage extends BasePage {
 
     @Step("Filling login form")
     public void fillForm(String username, String password) {
-        log.info("Filling username: " + username);
+        logs.info("Filling username: " + username);
         usernameInput.sendKeys(username);
 
-        log.info("Filling password: " + password);
+        logs.info("Filling password: " + password);
         passwordInput.sendKeys(password);
 
-        log.info("Clicking on login button");
+        logs.info("Clicking on login button");
         loginButton.click();
     }
 

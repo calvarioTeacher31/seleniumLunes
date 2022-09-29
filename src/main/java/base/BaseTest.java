@@ -20,6 +20,7 @@ public abstract class BaseTest {
     private WebDriver driver;
     protected final String smoke = "Smoke";
     protected final String regression = "Regression";
+    protected final String setup = "Setup";
     protected final DataProviders dataProviders = new DataProviders();
     protected CommonFlows commonFlows;
 

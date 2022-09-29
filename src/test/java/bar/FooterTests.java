@@ -12,7 +12,7 @@ import static data.DataProviders.URL_DP;
 public class FooterTests extends BaseTest {
     private FooterPage footerPage;
 
-    @BeforeMethod(alwaysRun = true, description = "setup")
+    @BeforeMethod(alwaysRun = true, description = setup)
     public void setUp() {
         commonFlows.goToHome();
     }

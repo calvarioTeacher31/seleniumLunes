@@ -33,13 +33,13 @@ public class HeaderPage extends BasePage {
 
     @Step("Clicking on burger Button to open burger menu")
     public void openBurgerMenu() {
-        log.info("Clicking on burger Button to open burger menu");
+        logs.info("Clicking on burger Button to open burger menu");
         burgerButton.click();
     }
 
     @Step("Clicking on cart image")
     public void clickOnCart() {
-        log.info("Clicking on cart image");
+        logs.info("Clicking on cart image");
         cartImage.click();
     }
 

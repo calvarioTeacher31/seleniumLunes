@@ -8,7 +8,7 @@ import webElements.list.$$;
 import webElements.single.$;
 
 public abstract class BasePage {
-    protected final Logs log = new Logs();
+    protected final Logs logs = new Logs();
     protected final WebDriver driver;
     private final int timeOut;
     private final int defaultTimeOut = 5;
@@ -28,12 +28,12 @@ public abstract class BasePage {
 
     protected void waitPage($ element, String pageName) {
         var message = String.format("Waiting %s to load", pageName);
-        log.info(message);
+        logs.info(message);
 
         element.waitForVisibility(timeOut);
 
         message = String.format("%s loaded successfully", pageName);
-        log.info(message);
+        logs.info(message);
     }
 
     protected $ $(By locator) {

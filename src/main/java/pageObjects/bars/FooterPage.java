@@ -37,7 +37,7 @@ public class FooterPage extends BasePage {
 
     @Step("Verifying Social Link")
     public void verifySocialLink(String socialName, String url) {
-        log.info("Verifying social link " + socialName);
+        logs.info("Verifying social link " + socialName);
         var socialElement = getSocialElement(socialName);
         softAssert.assertTrue(socialElement.isDisplayed(), "Displayed");
         softAssert.assertTrue(socialElement.isEnabled(), "Enabled");

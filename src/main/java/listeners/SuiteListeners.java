@@ -1,18 +1,16 @@
 package listeners;
 
+import base.BaseListener;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
-import utilities.DriverManager;
-import utilities.FileManager;
 import utilities.Logs;
 
-public class SuiteListeners implements ISuiteListener {
+public class SuiteListeners extends BaseListener implements ISuiteListener {
     private final Logs log = new Logs();
 
     @Override
     public void onStart(ISuite suite) {
-        new DriverManager().deletePreviousEvidence();
-        new FileManager().redirectStdErr();
+        fileManager.deleteAllureReports().deleteTestEvidence().redirectStdErr();
         log.startSuite(suite.getName());
     }
 

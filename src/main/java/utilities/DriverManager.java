@@ -1,31 +1,32 @@
 package utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Attachment;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
-
-import java.io.File;
-import java.io.IOException;
 
 public class DriverManager {
     protected final Logs log = new Logs();
-    private final String screenShotPath = "src/test/resources/screenshots";
-    private final String allureReportPath = "target/allure-results";
     protected WebDriver driver;
-    private static WebDriver staticDriver;
+    private boolean headlessMode = true;
 
     public WebDriver createDriver() {
         var browserName = System.getProperty("browser");
+        var headlessString = System.getProperty("headlessMode");
 
         if (browserName == null) {
             log.debug("Setting default local browser to CHROME");
             browserName = "CHROME";
+        }
+
+        if (headlessString == null) {
+            log.debug("Setting default headless mode to false");
+            headlessMode = false;
         }
 
         log.debug("Initializing the driver");
@@ -33,12 +34,20 @@ public class DriverManager {
             case "CHROME":
                 log.debug("Chrome driver");
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                var chromeOptions = new ChromeOptions().setHeadless(headlessMode);
+                driver = new ChromeDriver(chromeOptions);
                 break;
             case "EDGE":
                 log.debug("Edge driver");
                 WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
+                var edgeOptions = new EdgeOptions().setHeadless(headlessMode);
+                driver = new EdgeDriver(edgeOptions);
+                break;
+            case "FIREFOX":
+                log.debug("Firefox driver");
+                WebDriverManager.firefoxdriver().setup();
+                var firefoxOptions = new FirefoxOptions().setHeadless(headlessMode);
+                driver = new FirefoxDriver(firefoxOptions);
                 break;
             case "SAFARI":
                 log.debug("Safari driver");
@@ -56,40 +65,8 @@ public class DriverManager {
         log.debug("Deleting cookies");
         driver.manage().deleteAllCookies();
 
-        staticDriver = driver;
+        FileManager.staticDriver = driver;
 
         return driver;
-    }
-
-    public void getScreenshot(WebDriver driver, String screenshotName) {
-        log.debug("Taking screenshot");
-
-        var screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        var path = String.format("%s/%s.png", screenShotPath, screenshotName);
-
-        try {
-            FileUtils.copyFile(screenshotFile, new File(path));
-        } catch (IOException ioException) {
-            log.error("Path does not exists");
-            log.error(ioException.getLocalizedMessage());
-        }
-    }
-
-    @Attachment(value = "Screenshot failure", type = "image/png")
-    public static byte[] getAllureScreenshot() {
-        return ((TakesScreenshot) staticDriver).getScreenshotAs(OutputType.BYTES);
-    }
-
-    public void deletePreviousEvidence() {
-        try {
-            log.debug("Cleaning screenshot folder");
-            FileUtils.deleteDirectory(new File(screenShotPath));
-
-            log.debug("Cleaning previous allure folder");
-            FileUtils.deleteDirectory(new File(allureReportPath));
-        } catch (IOException ioException) {
-            log.error("Failed cleaning screenshot and allure folder");
-            log.error(ioException.getLocalizedMessage());
-        }
     }
 }

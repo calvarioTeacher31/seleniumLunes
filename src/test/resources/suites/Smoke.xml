@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Smoke suite" verbose="0" time-out="60000">
+<suite name="Smoke suite" verbose="0" time-out="60000" parallel="tests" thread-count="2">
     <groups>
         <run>
             <include name="Smoke"/>
@@ -12,9 +12,32 @@
         <listener class-name="listeners.SuiteListeners"/>
     </listeners>
 
-    <test name="Basic Tests">
-        <packages>
-            <package name="basic"/>
-        </packages>
+    <test name="Bar Tests">
+        <classes>
+            <class name="bar.BurgerMenuTests"/>
+            <class name="bar.FooterTests"/>
+            <class name="bar.HeaderTests"/>
+        </classes>
+    </test>
+
+    <test name="Home Tests">
+        <classes>
+            <class name="home.HomeShoppingTests"/>
+        </classes>
+    </test>
+
+    <test name="Login Tests">
+        <classes>
+            <class name="login.LoginTests"/>
+        </classes>
+    </test>
+
+    <test name="Step Tests">
+        <classes>
+            <class name="step.StepOneTests"/>
+            <class name="step.CartTests"/>
+            <class name="step.StepTwoTests"/>
+            <class name="step.FinishCheckoutTests"/>
+        </classes>
     </test>
 </suite>

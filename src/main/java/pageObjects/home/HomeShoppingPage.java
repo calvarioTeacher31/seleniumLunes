@@ -38,17 +38,17 @@ public class HomeShoppingPage extends BasePage {
 
     @Step("Clicking on all items")
     public void addAllItemsToCart() {
-        log.info("Clicking on all items");
+        logs.info("Clicking on all items");
         buttonList.clickAll();
     }
 
     @Step("Ordering items by price")
     public void orderItemsByPrice(boolean isLowToHigh) {
         if (isLowToHigh) { //low to high case
-            log.info("Selecting low to high on price select");
+            logs.info("Selecting low to high on price select");
             selectFilterItem.selectByValue("lohi");
         } else { //high to low case
-            log.info("Selecting high to low on price select");
+            logs.info("Selecting high to low on price select");
             selectFilterItem.selectByValue("hilo");
         }
     }
@@ -56,48 +56,48 @@ public class HomeShoppingPage extends BasePage {
     @Step("Ordering items by name")
     public void orderItemsByName(boolean isAZ) {
         if (isAZ) { //A to Z case
-            log.info("Selecting A to Z on name select");
+            logs.info("Selecting A to Z on name select");
             selectFilterItem.selectByValue("az");
         } else { //Z to A case
-            log.info("Selecting Z to A on name select");
+            logs.info("Selecting Z to A on name select");
             selectFilterItem.selectByValue("za");
         }
     }
 
     @Step("Verifying price order")
     public void verifyItemPriceOrder(boolean isLowToHigh) {
-        log.info("Getting first item price from price list");
+        logs.info("Getting first item price from price list");
         var firstItemPrice = Double.parseDouble(
                 itemPriceList.getFirst().getText().substring(1)
         ); //first price 49.99
 
-        log.info("Getting last item price from price list");
+        logs.info("Getting last item price from price list");
         var lastItemPrice = Double.parseDouble(
                 itemPriceList.getLast().getText().substring(1)
         ); //last price 7.99
 
         if (isLowToHigh) { //low to high case
-            log.info("Verifying first price is lower than last price");
+            logs.info("Verifying first price is lower than last price");
             Assert.assertTrue(firstItemPrice < lastItemPrice);
         } else { //high to low case
-            log.info("Verifying last price is lower than first price");
+            logs.info("Verifying last price is lower than first price");
             Assert.assertTrue(firstItemPrice > lastItemPrice);
         }
     }
 
     @Step("Verifying item name order")
     public void verifyItemNameOrder(boolean isAZ) {
-        log.info("Getting first item name from item name list");
+        logs.info("Getting first item name from item name list");
         var firstItemName = itemNameList.getFirst().getText();
 
-        log.info("Getting last item name from item name list");
+        logs.info("Getting last item name from item name list");
         var lastItemName = itemNameList.getLast().getText();
 
         if (isAZ) { //A to Z case
-            log.info("Verifying item name list is ordered A to Z");
+            logs.info("Verifying item name list is ordered A to Z");
             Assert.assertTrue(firstItemName.compareToIgnoreCase(lastItemName) < 0);
         } else { //Z to A case
-            log.info("Verifying item name list is ordered Z to A");
+            logs.info("Verifying item name list is ordered Z to A");
             Assert.assertTrue(firstItemName.compareToIgnoreCase(lastItemName) > 0);
         }
     }

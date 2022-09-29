@@ -34,7 +34,7 @@ public class BurgerMenuPage extends BasePage {
 
     @Step("Verifying about option link")
     public void verifyAboutOption(String url) {
-        log.info("Verifying about option link");
+        logs.info("Verifying about option link");
         softAssert.assertTrue(aboutOption.isDisplayed());
         softAssert.assertTrue(aboutOption.isEnabled());
         softAssert.assertEquals(aboutOption.getHref(), url);
@@ -43,7 +43,7 @@ public class BurgerMenuPage extends BasePage {
 
     @Step("Clicking on logout option")
     public void clickOnLogout() {
-        log.info("Clicking on logout option");
+        logs.info("Clicking on logout option");
         logoutOption.click();
     }
 }

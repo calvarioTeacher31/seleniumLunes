@@ -11,7 +11,7 @@ public class HomeShoppingTests extends BaseTest {
     private HomeShoppingPage homeShoppingPage;
     private HeaderPage headerPage;
 
-    @BeforeMethod(alwaysRun = true, description = "Setup")
+    @BeforeMethod(alwaysRun = true, description = setup)
     public void setup() {
         commonFlows.goToHome();
     }

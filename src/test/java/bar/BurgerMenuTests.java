@@ -11,7 +11,7 @@ public class BurgerMenuTests extends BaseTest {
     private BurgerMenuPage burgerMenuPage;
     private LoginPage loginPage;
 
-    @BeforeMethod(alwaysRun = true, description = "setup")
+    @BeforeMethod(alwaysRun = true, description = setup)
     public void setUp() {
         commonFlows.openBurgerMenu();
     }

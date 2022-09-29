@@ -3,6 +3,7 @@ package data;
 import com.poiji.bind.Poiji;
 import models.Credentials;
 import models.ErrorMessage;
+import models.ShoppingItem;
 import models.Url;
 import utilities.Logs;
 
@@ -26,5 +27,10 @@ public class ExcelReader {
     public List<ErrorMessage> getErrorMessageList() {
         log.debug("Reading error message from excel");
         return Poiji.fromExcel(new File(excelPath), ErrorMessage.class);
+    }
+
+    public List<ShoppingItem> getShoppingItemList() {
+        log.debug("Reading shopping item from excel");
+        return Poiji.fromExcel(new File(excelPath), ShoppingItem.class);
     }
 }

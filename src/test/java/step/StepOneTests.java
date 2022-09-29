@@ -1,32 +1,41 @@
 package step;
 
 import base.BaseTest;
+import data.DataProviders;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pageObjects.home.HomeShoppingPage;
+import pageObjects.step.CartPage;
 import pageObjects.step.StepOnePage;
 
-public class StepOneTests extends BaseTest {
-    private StepOnePage stepOnePage;
-    private HomeShoppingPage homeShoppingPage;
+import static data.DataProviders.USER_INFORMATION_DP;
 
-    @BeforeMethod(alwaysRun = true, description = "setup")
+public class StepOneTests extends BaseTest {
+    private CartPage cartPage;
+    private StepOnePage stepOnePage;
+
+    @BeforeMethod(alwaysRun = true, description = setup)
     public void setUp() {
         commonFlows.goToStepOne(true);
     }
 
     @Test(groups = smoke)
-    public void verifyStepOneTest() {
+    public void verifyStepTwoPageTest() {
         stepOnePage.verifyPage();
-        stepOnePage.clickOnContinueShopping();
-        homeShoppingPage.waitPageToLoad();
-        homeShoppingPage.verifyPage();
+        stepOnePage.clickOnCancelButton();
+        cartPage.waitPageToLoad();
+        cartPage.verifyPage();
+    }
+
+    @Test(groups = regression, dataProvider = USER_INFORMATION_DP, dataProviderClass = DataProviders.class)
+    public void errorMessageTest(String firstname, String lastname, String zipcode, String errorMessage) {
+        stepOnePage.fillForm(firstname, lastname, zipcode);
+        stepOnePage.verifyErrorMessage(errorMessage);
     }
 
     @Override
     protected void initPages(WebDriver driver) {
+        cartPage = new CartPage(driver);
         stepOnePage = new StepOnePage(driver);
-        homeShoppingPage = new HomeShoppingPage(driver);
     }
 }

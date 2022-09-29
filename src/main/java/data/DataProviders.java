@@ -1,9 +1,12 @@
 package data;
 
 import models.Credentials;
+import models.ShoppingItem;
 import models.UserInformation;
 import org.testng.annotations.DataProvider;
 import utilities.Logs;
+
+import java.util.List;
 
 public class DataProviders {
     private final Logs log = new Logs();
@@ -25,6 +28,11 @@ public class DataProviders {
     public String aboutOptionUrl() {
         log.debug("Getting about option url");
         return mapParser.getUrlMap().get("Saucelabs").getUrl();
+    }
+
+    public List<ShoppingItem> getShoppingList() {
+        log.debug("Getting shopping list");
+        return excelReader.getShoppingItemList();
     }
 
     @DataProvider(name = URL_DP)
